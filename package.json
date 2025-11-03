@@ -1,0 +1,109 @@
+{
+  "name": "bbzbl-modul-169",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "wireit",
+    "start-poll": "docusaurus start --poll 1 --host 0.0.0.0",
+    "start:marp": "wireit",
+    "build": "docusaurus build",
+    "build:marp": "marp --engine ./src/marp/async-engine.mjs --html --allow-local-files --theme slides/theme.css -I slides --output build/slides",
+    "build:marp-pdf": "marp --engine ./src/marp/async-engine.mjs --html --allow-local-files --theme slides/theme.css -I slides --output build/slides --pdf --pdf-outlines --pdf-outlines.pages=false",
+    "build:marp-copy-images": "cp -r slides/images build/slides/images",
+    "build:marp-copy-js": "cp -r slides/js build/slides/js",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "dev": "wireit"
+  },
+  "wireit": {
+    "start": {
+      "command": "docusaurus start --no-open --port 4000",
+      "service": {
+        "readyWhen": {
+          "lineMatches": "Docusaurus website is running at.*"
+        }
+      }
+    },
+    "dev": {
+      "dependencies": [
+        "start",
+        "start:marp"
+      ]
+    },
+    "start:marp": {
+      "command": "env PORT=4001 marp --engine ./src/marp/async-engine.mjs --html --allow-local-files --theme slides/theme.css --watch --server slides",
+      "service": true
+    }
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/faster": "^3.9.2",
+    "@docusaurus/plugin-content-docs": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/theme-common": "^3.9.2",
+    "@docusaurus/theme-mermaid": "^3.9.2",
+    "@docusaurus/utils": "^3.9.2",
+    "@marp-team/marp-cli": "^4.2.3",
+    "@mdx-js/react": "^3.0.0",
+    "@mermaid-js/mermaid-cli": "^11.12.0",
+    "clsx": "^2.0.0",
+    "devserver-config": "file:plugins/devserver-config",
+    "jsdom": "^26.1.0",
+    "markdown-it-container": "^4.0.0",
+    "markdown-it-external-links": "^0.0.6",
+    "markdown-it-mark": "^4.0.0",
+    "prettier": "^3.6.2",
+    "prism-react-renderer": "^2.3.0",
+    "puppeteer": "24.26.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-lite-youtube-embed": "^2.5.6",
+    "remark-docusaurus-tabs": "^0.2.0",
+    "remark-html": "^16.0.1",
+    "remark-oembed": "^1.2.2",
+    "temp": "^0.9.4",
+    "wireit": "^0.14.12"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.9.2",
+    "@docusaurus/types": "^3.9.2",
+    "@marp-team/marp-core": "^4.1.0",
+    "@mdit/plugin-mark": "^0.22.1",
+    "fs-extra": "^11.3.1",
+    "markdown-it-footnote": "^4.0.0"
+  },
+  "prettier": {
+    "proseWrap": "always",
+    "embeddedLanguageFormatting": "auto"
+  },
+  "markdownlint.config": {
+    "MD049": {
+      "style": "asterisk"
+    }
+  },
+  "marp": {
+    "options": {
+      "markdown": {
+        "breaks": false,
+        "linkify": true
+      }
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

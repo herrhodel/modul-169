@@ -1,0 +1,318 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+@font-face {
+  font-family: "Noto Emoji";
+  src: url("../../static/fonts/NotoEmoji-VariableFont_wght.ttf")
+    format("truetype");
+}
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #ea3222;
+  --ifm-color-primary-dark: #dc2515;
+  --ifm-color-primary-darker: #d02314;
+  --ifm-color-primary-darkest: #ab1d10;
+  --ifm-color-primary-light: #ec493a;
+  --ifm-color-primary-lighter: #ed5447;
+  --ifm-color-primary-lightest: #f1766b;
+  --ifm-code-font-size: 95%;
+  --ifm-link-color: #3867a3;
+  /* --ifm-menu-color: rgb(68, 73, 80); */
+  --ifm-heading-color: rgb(68, 73, 80);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base:
+    system-ui, -apple-system, Noto Emoji, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif, BlinkMacSystemFont;
+  --mermaid-java-builtin-stroke-color: #00000040;
+  --mermaid-java-builtin-fill-color: #00000005;
+  --mermaid-java-builtin-text-color: #00000075;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+  --ifm-color-primary: #ea3222;
+  --ifm-color-primary-dark: #dc2515;
+  --ifm-color-primary-darker: #d02314;
+  --ifm-color-primary-darkest: #ab1d10;
+  --ifm-color-primary-light: #ec493a;
+  --ifm-color-primary-lighter: #ed5447;
+  --ifm-color-primary-lightest: #f1766b;
+  --ifm-link-color: lightblue;
+  /* --ifm-menu-color: rgb(218, 221, 225); */
+  --ifm-heading-color: rgb(218, 221, 225);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-font-family-base:
+    system-ui, -apple-system, Noto Emoji, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif, BlinkMacSystemFont;
+  --mermaid-java-builtin-stroke-color: #00000040;
+  --mermaid-java-builtin-fill-color: #ffffff95;
+  --mermaid-java-builtin-text-color: #000000;
+}
+
+.menu__link--sublist {
+  color: var(--ifm-heading-color);
+  font-weight: bold;
+}
+
+@media print {
+  @page {
+    size: a4;
+  }
+
+  :root {
+    --ifm-font-size-base: 80%;
+    --ifm-alert-shadow: none;
+    --ifm-global-shadow-lw: none;
+    --ifm-global-shadow: none;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .theme-doc-footer {
+    display: none;
+  }
+  .theme-code-block,
+  .theme-admonition,
+  .docusaurus-mermaid-container svg,
+  p {
+    page-break-inside: avoid;
+  }
+  .docusaurus-mermaid-container svg {
+    max-height: vh;
+    text-align: center;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    page-break-after: avoid;
+  }
+
+  /* details { */
+  /*   display: none; */
+  /* } */
+
+  iframe {
+    display: none;
+  }
+}
+
+.break {
+  page-break-after: always;
+}
+
+/* center images */
+article img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+iframe {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 1rem;
+}
+
+iframe[src$="pdf"] {
+  height: 800px;
+}
+
+@media (max-width: 996px) {
+  iframe {
+    height: 250px;
+  }
+}
+
+@media print, (min-width: 996px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .grid.four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .grid .center {
+    align-self: center;
+  }
+  .grid.twentyEighty {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 8fr);
+  }
+}
+
+table {
+  display: table;
+  table-layout: auto;
+  width: 100%;
+}
+
+table hr {
+  background-color: var(--ifm-color-primary-darkest);
+}
+
+img[src$="#center"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+img[src$="#right"] {
+  display: block;
+  margin-left: auto;
+  width: 70%;
+}
+
+img[src$="#left"] {
+  display: block;
+  margin-right: auto;
+  width: 70%;
+}
+
+li.primary {
+  border-left: 2px solid var(--ifm-color-primary);
+}
+
+li.warning {
+  border-left: 2px solid var(--ifm-color-warning);
+}
+
+li.info {
+  border-left: 2px solid var(--ifm-color-info);
+}
+
+li.success {
+  border-left: 2px solid var(--ifm-color-success);
+  a {
+    color: var(--ifm-color-success-lighter);
+  }
+}
+
+li.hidden {
+  display: none;
+}
+
+/* codeblock magic comments */
+.highlight {
+  background-color: #ccc;
+}
+
+.code-block-red-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  color: black;
+}
+.code-block-red-line,
+.code-block-red-line > span:first-child:not(.token) {
+  border-left: 3px solid #ff000080;
+  background-color: #ff000020;
+}
+.code-block-red-line > span:first-child:not(.token)::before {
+  opacity: 0.9;
+  font-weight: bolder;
+}
+.code-block-red-line .comment {
+  color: var(--ifm-color-primary-dark) !important;
+}
+
+.code-block-green-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+.code-block-green-line,
+.code-block-green-line > span:first-child:not(.token) {
+  background-color: #00a17020;
+  border-left: 3px solid #00a17080;
+}
+.code-block-green-line > span:first-child:not(.token)::before {
+  opacity: 0.9;
+  font-weight: bolder;
+}
+
+.code-block-yellow-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+.code-block-yellow-line,
+.code-block-yellow-line > span:first-child:not(.token) {
+  background-color: #f5df4e40;
+  border-left: 3px solid #f5df4e80;
+}
+.code-block-yellow-line > span:first-child:not(.token)::before {
+  opacity: 0.9;
+  font-weight: bolder;
+}
+
+.code-block-orange-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+.code-block-orange-line,
+.code-block-orange-line > span:first-child:not(.token) {
+  background-color: #f0780040;
+  border-left: 3px solid #f0780080;
+}
+.code-block-orange-line > span:first-child:not(.token)::before {
+  opacity: 0.9;
+  font-weight: bolder;
+}
+
+.code-block-blue-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+.code-block-blue-line,
+.code-block-blue-line > span:first-child:not(.token) {
+  background-color: #0072b520;
+  border-left: 3px solid #0072b580;
+}
+.code-block-blue-line > span:first-child:not(.token)::before {
+  opacity: 0.9;
+  font-weight: bolder;
+}
+
+.theme-code-block-highlighted-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+.theme-code-block-highlighted-line,
+.theme-code-block-highlighted-line > span:first-child:not(.token) {
+  border-left: 3px solid #bab4b599;
+  background-color: #bab4b520;
+}
+.theme-code-block-highlighted-line > span:first-child:not(.token)::before {
+  opacity: 0.9;
+  font-weight: bolder;
+}
+
+/* Mermaid */
+.javaBuiltIn > rect {
+  stroke: var(--mermaid-java-builtin-stroke-color) !important;
+  fill: var(--mermaid-java-builtin-fill-color) !important;
+}
+.javaBuiltIn .nodeLabel {
+  color: var(--mermaid-java-builtin-text-color) !important;
+}
+
+.blank .navbar,
+.blank footer {
+  display: none;
+}
+
+.custom-anchor {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
+}
