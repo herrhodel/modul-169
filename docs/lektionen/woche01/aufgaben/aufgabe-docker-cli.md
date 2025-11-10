@@ -146,7 +146,7 @@ Informationen an.
 
 Der Befehl erstellt ein Volume namens _myvolume_ und startet einen Container,
 der das Volume im Verzeichnis _/data_ einbindet. Sie können die Volumes mit
-`docker volume ls` auflisten, um zu überprüfen, ob das Volume erfolgreich erstellt
-wurde
+`docker volume ls` auflisten, um zu überprüfen, ob das Volume erfolgreich
+erstellt wurde
 
 </details>

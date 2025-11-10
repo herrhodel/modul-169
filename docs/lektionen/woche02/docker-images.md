@@ -414,7 +414,7 @@ Sie Ihre Docker-Images schneller und effektiver erstellen.
 
 ## Multistage Builds
 
-Multistage Builds in Dockerfiles sind eine Technik, die es ermöglicht, mehrere
+Multistage Builds in *Dockerfiles* sind eine Technik, die es ermöglicht, mehrere
 Schritte beim Erstellen eines Docker-Images zu kombinieren. Dadurch kann die
 Größe des endgültigen Images reduziert und die Build-Zeit optimiert werden. Hier
 ist eine einfache Erklärung mit Beispielen:
