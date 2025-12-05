@@ -6,6 +6,7 @@
 
 import { themes as prismThemes } from "prism-react-renderer";
 const modulConfig = require("./modul.config");
+const remarkEmbedPlugin = require("./src/plugins/remark-embed");
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -47,7 +48,10 @@ const config = {
     locales: ["de"],
   },
 
-  themes: [require.resolve("@docusaurus/theme-mermaid")],
+  themes: [
+    require.resolve("@docusaurus/theme-mermaid"),
+    // require.resolve("docusaurus-theme-github-codeblock"),
+  ],
 
   presets: [
     [
@@ -59,7 +63,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: `${modulConfig.url}/${modulConfig.repoName}`,
-          remarkPlugins: [],
+          beforeDefaultRemarkPlugins: [remarkEmbedPlugin],
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -145,9 +149,16 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} BBZBL, Made with ❤️ in Pratteln`,
       },
       prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.duotoneDark,
-        additionalLanguages: ["java", "bash", "docker", "python", "yaml"],
+        theme: prismThemes.oneLight,
+        darkTheme: prismThemes.oneDark,
+        additionalLanguages: [
+          "java",
+          "bash",
+          "docker",
+          "python",
+          "yaml",
+          "markdown",
+        ],
         magicComments: [
           // Remember to extend the default highlight class name as well!
           {
