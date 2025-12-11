@@ -63,21 +63,6 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl: `${modulConfig.url}/${modulConfig.repoName}`,
           beforeDefaultRemarkPlugins: [remarkEmbedPlugin],
-          rehypePlugins: [
-            [
-              rehypeRaw,
-              {
-                passThrough: [
-                  'html',
-                  'mdxFlowExpression',
-                  'mdxJsxFlowElement',
-                  'mdxJsxTextElement',
-                  'mdxTextExpression',
-                  'mdxjsEsm'
-                ]
-              }
-            ]
-          ]
         },
         theme: {
           customCss: "./src/css/custom.css",

@@ -22,10 +22,10 @@ function convertGitHubBlobToRawUrl(url) {
 }
 
 function convertGitHubToUrl(url) {
-  if (url.startsWith("/")) return `https://github.com${url.replace("#", "?plain=1#")}`
+  if (url.startsWith("/"))
+    return `https://github.com${url.replace("#", "?plain=1#")}`;
   return url.replace("#", "?plain=1#");
 }
-
 
 function detectLanguage(path) {
   const filename = path?.split("/").pop();
@@ -62,8 +62,9 @@ function remarkEmbedPlugin() {
         const url = node.attributes.url;
         const lang = node.attributes.lang;
         const nolink =
-          node.attributes.nolink === "true" ||
-          node.attributes.nolink === ""; 
+          node.attributes.nolink === "true" || node.attributes.nolink === "";
+        const notitle =
+          node.attributes.notitle === "true" || node.attributes.notitle === "";
         const title = node.children[0]?.value || undefined;
 
         if (url) {
@@ -74,6 +75,7 @@ function remarkEmbedPlugin() {
             lang,
             title,
             nolink,
+            notitle,
             parent,
             index,
           });
@@ -84,7 +86,7 @@ function remarkEmbedPlugin() {
     // 2. Führe alle Fetch-Operationen parallel aus und warte darauf
     await Promise.all(
       nodesToFetch.map(
-        async ({ node, url, lang, title, nolink, parent, index }) => {
+        async ({ node, url, lang, title, nolink, notitle, parent, index }) => {
           try {
             const rawUrl = convertGitHubBlobToRawUrl(url);
             const response = await fetch(rawUrl);
@@ -94,37 +96,37 @@ function remarkEmbedPlugin() {
               );
             }
             const codeContent = await response.text();
-            const lineContent = codeContent.split('\n');
+            const lineContent = codeContent.split("\n");
             const path = url.split("#")[0];
             const hash = url.split("#")?.[1];
 
-            lines = hash 
-              ? hash.includes("-") 
+            lines = hash
+              ? hash.includes("-")
                 ? hash.replaceAll("L", "").split("-")
                 : [hash.replaceAll("L", ""), hash.replace("L", "")]
               : null;
-            const linesToParse = lines 
-              ? lineContent.slice(Number(lines[0] - 1), Number(lines[1])).join('\n')
+            const linesToParse = lines
+              ? lineContent
+                  .slice(Number(lines[0] - 1), Number(lines[1]))
+                  .join("\n")
               : codeContent;
+
+            const linkHtml = `<p style={{textAlign: "right", fontSize: "0.8em", color: "#666", marginTop: "5px"}}>
+                <a href="${convertGitHubToUrl(url)}" target="_blank" rel="noopener noreferrer">Quelle</a>
+              </p>`;
+            const githubLink = unified.parse(linkHtml);
 
             if (lang === undefined) lang = detectLanguage(path);
 
             if (lang === "markdown_inline") {
               const embeddedTree = unified.parse(linesToParse);
-              
+
               Object.assign(node, {
-                children: embeddedTree.children.concat([
-                  !nolink 
-                    ? {
-                      type: "html",
-                      value: `<p style="text-align: right; font-size: 0.8em; color: #666; margin-top: 5px;">
-                        Quelle: <a href="${convertGitHubToUrl(url)}" target="_blank" rel="noopener noreferrer">GitHub</a>
-                      </p>`
-                    }
-                    : {}
-                ]),
                 name: undefined,
                 attributes: undefined,
+                children: embeddedTree.children.concat(
+                  nolink ? [] : githubLink.children,
+                ),
               });
             } else {
               const urlArray = rawUrl.split("/main");
@@ -139,17 +141,9 @@ function remarkEmbedPlugin() {
                     value: linesToParse,
                     children: undefined,
                     name: undefined,
-                    meta: `title="${filename}"`, 
+                    meta: notitle ? undefined : `title="${filename}"`,
                   },
-                  !nolink 
-                    ? {
-                      type: "html",
-                      value: `<p style="text-align: right; font-size: 0.8em; color: #666; margin-top: 5px;">
-                        Quelle: <a href="${convertGitHubToUrl(url)}" target="_blank" rel="noopener noreferrer">GitHub</a>
-                      </p>`
-                    }
-                    : {}
-                ]
+                ].concat(nolink ? [] : githubLink.children),
               });
             }
           } catch (error) {
