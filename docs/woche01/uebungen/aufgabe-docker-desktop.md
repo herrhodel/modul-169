@@ -1,4 +1,4 @@
-# Aufgabe 2 - Docker Desktop
+# Docker Desktop
 
 Versuchen Sie nun alle Aufgaben **ohne Docker CLI** durchzuarbeiten. Gelingt
 dies immer?

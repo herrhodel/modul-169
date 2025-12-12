@@ -1,6 +1,6 @@
-# Aufgabe 3 - Praktische Anwendungen
+# Praktische Anwendungen
 
-Es gibt viele FOSS (Free and Open Source Software) Anwendungen, die bereits als
+Es gibt viele FOSS (Free and Open-Source-Software) Anwendungen, die bereits als
 Container angeboten werden und sich gut für den Heimgebrauch eignen,
 insbesondere wenn man ein sogenanntes Homelab betreibt (eigene Server zu Hause).
 Dazu gehören Anwendungen, die ähnliche Funktionen wie _Office 365_ oder _Google

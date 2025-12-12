@@ -1,14 +1,15 @@
 ---
 sidebar_position: 4
 ---
-# Aufgaben
+
+# Übungen
 
 ## Installation von Docker Desktop oder Docker
 
 Damit wir Docker verwenden können, müssen wir es zuerst installieren. Bei
 Windows und MacOS geschieht dies über Docker Desktop, auf Linux kann man Docker
-oder Docker Desktop erwenden. Wenn man Docker Desktop verwendet, läuft Docker in
-einer virtuellen Maschine.
+oder Docker Desktop verwenden. Wenn man Docker Desktop verwendet, läuft Docker
+in einer virtuellen Maschine.
 
 Wählen Sie die für Sie passende Anleitung unten aus und installieren Sie Docker
 Desktop oder Docker.
@@ -64,5 +65,3 @@ Container-basierte Anwendungen effizient zu steuern und zu orchestrieren.
 
 Diese Befehle sind grundlegend für die Arbeit mit Docker und helfen Ihnen,
 Container und Images effektiv zu verwalten.
-
-
