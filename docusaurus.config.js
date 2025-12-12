@@ -7,7 +7,6 @@
 import { themes as prismThemes } from "prism-react-renderer";
 const modulConfig = require("./modul.config");
 const remarkEmbedPlugin = require("./src/plugins/remark-embed");
-import rehypeRaw from 'rehype-raw';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {

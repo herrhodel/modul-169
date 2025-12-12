@@ -99,8 +99,7 @@ function remarkEmbedPlugin() {
             const lineContent = codeContent.split("\n");
             const path = url.split("#")[0];
             const hash = url.split("#")?.[1];
-
-            lines = hash
+            const lines = hash
               ? hash.includes("-")
                 ? hash.replaceAll("L", "").split("-")
                 : [hash.replaceAll("L", ""), hash.replace("L", "")]
@@ -110,17 +109,15 @@ function remarkEmbedPlugin() {
                   .slice(Number(lines[0] - 1), Number(lines[1]))
                   .join("\n")
               : codeContent;
-
-            const linkHtml = `<p style={{textAlign: "right", fontSize: "0.8em", color: "#666", marginTop: "5px"}}>
+            const githubLink =
+              unified.parse(`<p style={{textAlign: "right", fontSize: "0.8em", color: "#666", marginTop: "5px"}}>
                 <a href="${convertGitHubToUrl(url)}" target="_blank" rel="noopener noreferrer">Quelle</a>
-              </p>`;
-            const githubLink = unified.parse(linkHtml);
+              </p>`);
 
             if (lang === undefined) lang = detectLanguage(path);
 
             if (lang === "markdown_inline") {
               const embeddedTree = unified.parse(linesToParse);
-
               Object.assign(node, {
                 name: undefined,
                 attributes: undefined,
@@ -131,7 +128,6 @@ function remarkEmbedPlugin() {
             } else {
               const urlArray = rawUrl.split("/main");
               const filename = title ? title : urlArray[urlArray.length - 1];
-
               Object.assign(node, {
                 type: "root",
                 children: [
@@ -147,10 +143,7 @@ function remarkEmbedPlugin() {
               });
             }
           } catch (error) {
-            console.error(
-              `Error fetching GitHub code for URL ${url}:`,
-              error.message,
-            );
+            console.error(`Error embed code for URL ${url}:`, error.message);
             // Ersetze durch einen Fehler-Kommentar im HTML
             Object.assign(node, {
               type: "html",
